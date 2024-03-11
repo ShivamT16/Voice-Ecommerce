@@ -1,0 +1,39 @@
+.detaill {
+    padding-bottom: 6rem;
+  }
+  
+  .detail {
+    border: 1px solid #514a9d;
+    background-color: whitesmoke;
+    border-radius: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 2rem;
+    margin: 2rem 4rem;
+  }
+  
+  .pname {
+    margin-left: -2.8rem;
+  }
+  
+  .detail2 {
+    /* border: 1px solid green; */
+    width: 50rem;
+    text-align: justify;
+    padding: 1.5rem;
+    margin: 0rem 1rem;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .detail {
+      padding-right: 0rem;
+      margin: 1rem 1rem;
+      margin-bottom: -1rem;
+    }
+    .detail2 {
+      padding: 0rem;
+      margin: 0rem 0rem;
+      margin-right: 1.5rem;
+    }
+  }
+  

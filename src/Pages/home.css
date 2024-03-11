@@ -1,0 +1,19 @@
+.Home {
+    background-color: whitesmoke;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 4rem;
+    margin-top: 4.5rem;
+    padding: 1rem;
+    font-family: cursive;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .Home {
+      gap: 1rem;
+      margin-top: 0rem;
+    }
+  }
+  
