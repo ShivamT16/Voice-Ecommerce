@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { Modal } from "@material-ui/core";
+import { Modal } from "@mui/material";
 import "./addresses.css";
 
 import { AddressContext } from "..";
