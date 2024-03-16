@@ -23,6 +23,9 @@
     margin: 0rem 0rem;
     padding: 2rem;
   }
+  .filter-1{
+    display: none;
+  }
   .filter2 {
     width: 10rem;
     text-align: left;
@@ -35,9 +38,24 @@
     font-size: 20px;
   }
   
-  /* @media screen and (max-width: 768px) {
+  @media screen and (max-width: 768px) {
+    .filter {
+      display: flex;
+      flex-direction: column;
+    }
     .filter1 {
-      /* display: none; */
-    /* } */
-  /* }  */
+      display: none;
+    }
+    .filter-1{
+      display: flex;
+      background-color: whitesmoke;
+    }
+    .filterSection{
+      padding: 1rem 2rem;
+    }
+    .apply-btn{
+      width: fit-content;
+      margin: 1rem 2rem;
+    }
+  } 
   

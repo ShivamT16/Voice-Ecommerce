@@ -1,6 +1,7 @@
 import { useContext, useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import Drawer from '@mui/material/Drawer';
 import "./product.css";
 
 import { CartContext, WishListContext, ProductContext } from "..";
@@ -25,6 +26,10 @@ export function Product({ products, categories }) {
     categoryFilter: [],
     ratingFilter: 0
   });
+  const [state, setState] = useState({ bottom: false });
+  const toggleDrawer = (open) => () => {
+    setState({ bottom: open });
+  };
 
   const navigate = useNavigate();
 
@@ -91,11 +96,8 @@ export function Product({ products, categories }) {
         )
       : [...categoryFiltered];
 
-  return (
-    <div className="filter">
-      <div className="filter1">
-        <button onClick={() => navigate(-1)}> Back </button>
-        <form onReset={handleClearFilter}>
+  const filterSection = (
+    <form className="filterSection" onReset={handleClearFilter}>
           <button type="reset">Clear Filters</button>
           <p className="filter2">
             <strong>Price </strong>
@@ -149,10 +151,27 @@ export function Product({ products, categories }) {
             5
           </p>
         </form>
+  )
+
+  return (
+    <div className="filter">
+      <div className="filter1">
+        <button onClick={() => navigate(-1)}> Back </button>
+        {filterSection}
+      </div>
+      <div className="filter-1">
+        <button onClick={toggleDrawer(true)} className="apply-btn">Apply Filter</button>
+        <Drawer
+            anchor={"bottom"}
+            open={state["bottom"]}
+            onClose={toggleDrawer(false)}
+          >
+     {filterSection}
+     <button onClick={toggleDrawer(false)} className="apply-btn" >Apply Filter</button>
+          </Drawer>
       </div>
 
       {loading && <Loader />}
-
       <div className="product">
         {ratingFiltered.map((item) => {
           const { id, name, price, image, rating } = item;

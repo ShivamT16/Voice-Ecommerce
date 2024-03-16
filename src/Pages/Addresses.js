@@ -110,8 +110,7 @@ export const Addresses = () => {
               placeholder="Pincode"
             />
             <button className="add-Btn" onClick={handleAdressesSubmit}>
-              {" "}
-              Add Address{" "}
+              Add Address
             </button>
           </div>
         </form>
