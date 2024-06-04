@@ -20,7 +20,7 @@ export const Cart = () => {
     <div>
       <div className="cartHeader">
         <p> Total Item In The Cart - {cart.length} </p>
-        <p>Total price- {totalPrice}</p>
+        <p>Total price-  ₹ {totalPrice}</p>
         <Link className="link" to="/address">
           {cart.length > 0 && <button className="nextBtn">Next</button>}
         </Link>

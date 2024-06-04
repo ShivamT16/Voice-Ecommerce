@@ -10,7 +10,6 @@ import { AddressContext, AddressProvider } from "./Contexts/AddressContext";
 import { AuthContext, AuthProvider } from "./Contexts/AuthContext";
 import { CategoryContext, CategoryProvider } from "./Contexts/CategoryContext";
 import App from "./App";
-// import reportWebVitals from './reportWebVitals';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 

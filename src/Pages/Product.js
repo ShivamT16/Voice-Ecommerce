@@ -185,7 +185,7 @@ export function Product({ products, categories }) {
                 <img alt="product img" src={image} />
                 <ul>{name}</ul>
                 <p>
-                  INR:{price} {rating}
+                  INR:{price}  ⭐{rating}
                 </p>
               </Link>
               {cart.find((element) => element.id === item.id) ? (
@@ -222,7 +222,6 @@ export function Product({ products, categories }) {
                 </button>
               )}
 
-              
             </div>
           );
         })}

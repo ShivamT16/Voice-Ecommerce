@@ -22,7 +22,7 @@ export const Checkout = () => {
               <div className="checkoutProduct">
                 <ul>{name}</ul>
                 <ul style={{ textAlign: "left" }}>
-                  Price: INR {price} X {quantity}
+                  Price:  ₹ {price} X {quantity}
                 </ul>
               </div>
             </div>
@@ -30,7 +30,7 @@ export const Checkout = () => {
         })}
       </div>
       <p className="totalPrice">
-        <strong>Total price: INR {totalPrice} </strong>
+        <strong>Total price:  ₹ {totalPrice} </strong>
       </p>
       <div className="check1">
         <h3> Selected Address </h3>
