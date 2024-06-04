@@ -33,7 +33,7 @@ export function AuthProvider({ children }) {
   const handleLogin = () => {
     setIsLoggedIn(!isLoggedIn);
     setTimeout(() => {
-      navigate("/", { replace: true }); emptyForm();
+      navigate("/login", { replace: true }); emptyForm();
     }, 1000);
   };
 

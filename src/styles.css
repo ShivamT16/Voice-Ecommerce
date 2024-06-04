@@ -85,7 +85,6 @@ button {
   border-radius: 5px;
   padding: 5px 8px;
   background-color: white;
-  box-shadow: 2px 2px 2px grey;
 }
 button:hover {
   background-color: lightgray;
@@ -115,7 +114,11 @@ button:hover {
     margin: 1rem -1rem -1rem;
   }
   .search-tab{
-    margin: 0rem 10%;
-    padding: 0rem 0.5rem;
+    font-size: 1.1rem;
+    margin: 0rem 8%;
+    padding: 0rem 0.2rem;
+  }
+  .link2{
+    width: 18rem;
   }
 }
