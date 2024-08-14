@@ -12,22 +12,22 @@ export const Cart = () => {
     handleIncreaseQuantity,
     handleDecreaseQuantity,
     totalPrice,
-    deleteNotify
+    deleteNotify, state, dispatch
   } = useContext(CartContext);
   const { handleWishListUpdate, wishListNotify } = useContext(WishListContext);
 
   return (
     <div>
       <div className="cartHeader">
-        <p> Total Item In The Cart - {cart.length} </p>
+        <p> Total Item In The Cart - {state.cart.length} </p>
         <p>Total price-  ₹ {totalPrice}</p>
         <Link className="link" to="/address">
-          {cart.length > 0 && <button className="nextBtn">Next</button>}
+          {state.cart.length > 0 && <button className="nextBtn">Next</button>}
         </Link>
       </div>
       <div className="cart">
-        {cart.length > 0 ? (
-          cart.map((item) => {
+        {state.cart.length > 0 ? (
+          state.cart.map((item) => {
             const { id, name, price, image, quantity } = item;
 
             return (
@@ -37,7 +37,10 @@ export const Cart = () => {
                 <ul>INR:{price}</ul>
                 <div>
                   <button
-                    onClick={() => handleDecreaseQuantity(item)}
+                    onClick={() => 
+                      // handleDecreaseQuantity(item)
+                      dispatch({type: "DECREASE_QUANTITY", payload: item})
+                    }
                     disabled={quantity === 1}
                   >
                     -
@@ -45,7 +48,10 @@ export const Cart = () => {
                   {quantity}
                   <button
                     type="button"
-                    onClick={() => handleIncreaseQuantity(item)}
+                    onClick={() => 
+                      // handleIncreaseQuantity(item)
+                      dispatch({type: "INCREASE_QUANTITY", payload: item})
+                    }
                   >
                     +
                   </button>
@@ -53,8 +59,9 @@ export const Cart = () => {
                 <button
                   type="button"
                   onClick={() => {
-                    handleDelete(id);
+                    // handleDelete(id);
                     deleteNotify();
+                    dispatch({type: "REMOVE_FROM_CART", payload: id})
                   }}
                 >
                   Remove
@@ -79,7 +86,7 @@ export const Cart = () => {
         )}
       </div>
       <Link className="link" to="/address">
-        {cart.length > 2 && <button className="nextBtn">Next</button>}
+        {state.cart.length > 2 && <button className="nextBtn">Next</button>}
       </Link>
       <ToastContainer autoClose={2000} />
     </div>

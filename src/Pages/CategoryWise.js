@@ -10,10 +10,10 @@ import {
 } from "..";
 
 export const CategoryWise = ({ products }) => {
-  const { handleCartUpdate, cartNotify, cart } = useContext(CartContext);
+  const { cartNotify, state, dispatch } = useContext(CartContext);
   const { handleWishListUpdate, wishListNotify } = useContext(WishListContext);
   const { handleProduct } = useContext(ProductContext);
-  const { state } = useContext(CategoryContext);
+  // const { state } = useContext(CategoryContext);
 
   return (
     <div className="product">
@@ -32,15 +32,16 @@ export const CategoryWise = ({ products }) => {
                 <ul>{name} </ul>
                 <p> INR: {price}</p>
               </Link>
-              {cart.find((element) => element.id === item.id) ? (
+              {state.cart.find((element) => element.id === item.id) ? (
                 <NavLink to="/cart">
                   <button> Go to Cart</button>
                 </NavLink>
               ) : (
                 <button
                   onClick={() => {
-                    handleCartUpdate(item);
+                    // handleCartUpdate(item);
                     cartNotify();
+                    dispatch({type:"ADD_TO_CART", payload: item})
                   }}
                 >
                   Add to Cart

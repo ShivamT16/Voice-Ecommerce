@@ -6,10 +6,10 @@ import "./productDetail.css";
 import { CartContext, WishListContext, ProductContext } from "..";
 
 export const ProductDetail = ({ products }) => {
-  const { handleCartUpdate, cartNotify, cart } = useContext(CartContext);
+  const { handleCartUpdate, cartNotify, cart, state, dispatch } = useContext(CartContext);
   const { handleWishListUpdate, wishListNotify } = useContext(WishListContext);
   const { product } = useContext(ProductContext);
-
+  // console.log(state.cart)
   return (
     <div>
       {products
@@ -27,15 +27,16 @@ export const ProductDetail = ({ products }) => {
                 <div className="detail2">
                   <p> {description} </p>
 
-                  {cart.find((element) => element.id === item.id) ? (
+                  {state.cart.find((element) => element.id === item.id) ? (
                     <Link to="/cart">
                       <button> Go to Cart</button>
                     </Link>
                   ) : (
                     <button
                       onClick={() => {
-                        handleCartUpdate(item);
+                        // handleCartUpdate(item);
                         cartNotify();
+                        dispatch({type:"ADD_TO_CART", payload: item})
                       }}
                     >
                       Add to Cart

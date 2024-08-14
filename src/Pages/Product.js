@@ -9,7 +9,7 @@ import { CartContext, WishListContext, ProductContext } from "..";
 import { Loader } from "./Loader";
 
 export function Product({ products, categories }) {
-  const { handleCartUpdate, cartNotify, deleteNotify, cart } = useContext(
+  const { handleCartUpdate, cartNotify, deleteNotify, cart, state, dispatch } = useContext(
     CartContext
   );
   const {
@@ -26,9 +26,9 @@ export function Product({ products, categories }) {
     categoryFilter: [],
     ratingFilter: 0
   });
-  const [state, setState] = useState({ bottom: false });
+  const [status, setStatus] = useState({ bottom: false });
   const toggleDrawer = (open) => () => {
-    setState({ bottom: open });
+    setStatus({ bottom: open });
   };
 
   const navigate = useNavigate();
@@ -163,7 +163,7 @@ export function Product({ products, categories }) {
         <button onClick={toggleDrawer(true)} className="apply-btn">Apply Filter</button>
         <Drawer
             anchor={"bottom"}
-            open={state["bottom"]}
+            open={status["bottom"]}
             onClose={toggleDrawer(false)}
           >
      {filterSection}
@@ -188,15 +188,16 @@ export function Product({ products, categories }) {
                   INR:{price}  ⭐{rating}
                 </p>
               </Link>
-              {cart.find((element) => element.id === item.id) ? (
+              {state.cart.find((element) => element.id === item.id) ? (
                 <Link to="/cart">
                   <button> Go to Cart</button>
                 </Link>
               ) : (
                 <button
                   onClick={() => {
-                    handleCartUpdate(item);
+                    // handleCartUpdate(item);
                     cartNotify();
+                    dispatch({type:"ADD_TO_CART", payload: item})
                   }}
                 >
                   Add to Cart

@@ -1,15 +1,19 @@
-import { createContext, useState } from "react";
+import { createContext, useReducer, useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { cartReducer, initialState } from "../Reducers/CartReducers";
 
 export const CartContext = createContext();
 
 export function CartProvider({ children }) {
+
+  const [state, dispatch] = useReducer(cartReducer, initialState)
+  // console.log(state.cart)
+  
   const [cart, setCart] = useState([]);
 
   const handleCartUpdate = (item) => {
     const findProduct = cart.find((element) => element.id === item.id);
-
     if (findProduct) {
       setCart(
         cart.map((cartItem) => {
@@ -51,7 +55,7 @@ export function CartProvider({ children }) {
     );
   };
 
-  const totalPrice = cart.reduce(
+  const totalPrice = state.cart.reduce(
     (acc, curr) => (acc += curr.price * curr.quantity),
     0
   );
@@ -69,7 +73,8 @@ export function CartProvider({ children }) {
         handleDecreaseQuantity,
         totalPrice,
         cartNotify,
-        deleteNotify
+        deleteNotify,
+        state, dispatch
       }}
     >
       {children}
