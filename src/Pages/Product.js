@@ -9,15 +9,8 @@ import { CartContext, WishListContext, ProductContext } from "..";
 import { Loader } from "./Loader";
 
 export function Product({ products, categories }) {
-  const { handleCartUpdate, cartNotify, deleteNotify, cart, state, dispatch } = useContext(
-    CartContext
-  );
-  const {
-    handleWishListUpdate,
-    wishList,
-    wishListNotify,
-    handleDelete
-  } = useContext(WishListContext);
+  const { cartNotify, deleteNotify, state, dispatch } = useContext(CartContext);
+  const { wishListNotify, states, dispatchs } = useContext(WishListContext);
   const { handleProduct } = useContext(ProductContext);
 
   const [loading, setLoading] = useState(false);
@@ -195,18 +188,17 @@ export function Product({ products, categories }) {
               ) : (
                 <button
                   onClick={() => {
-                    // handleCartUpdate(item);
-                    cartNotify();
                     dispatch({type:"ADD_TO_CART", payload: item})
+                    cartNotify();
                   }}
                 >
                   Add to Cart
                 </button>
               )}
-              {wishList.find((element) => element.id === item.id) ? (
+              {states.wishlist.find((element) => element.id === item.id) ? (
                 <button
                   onClick={() => {
-                    handleDelete(id);
+                    dispatchs({type:"REMOVE_FROM_WISHLIST", payload: id})
                     deleteNotify();
                   }}
                 >
@@ -215,8 +207,9 @@ export function Product({ products, categories }) {
               ) : (
                 <button
                   onClick={() => {
-                    handleWishListUpdate(item);
+                    dispatchs({type:"ADD_TO_WISHLIST", payload: item})
                     wishListNotify();
+
                   }}
                 >
                   Add to Favourite

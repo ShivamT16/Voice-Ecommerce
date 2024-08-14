@@ -6,10 +6,10 @@ import "./productDetail.css";
 import { CartContext, WishListContext, ProductContext } from "..";
 
 export const ProductDetail = ({ products }) => {
-  const { handleCartUpdate, cartNotify, cart, state, dispatch } = useContext(CartContext);
-  const { handleWishListUpdate, wishListNotify } = useContext(WishListContext);
+  const { cartNotify, deleteNotify, state, dispatch } = useContext(CartContext);
+  const { wishListNotify,states, dispatchs } = useContext(WishListContext);
   const { product } = useContext(ProductContext);
-  // console.log(state.cart)
+  
   return (
     <div>
       {products
@@ -34,7 +34,6 @@ export const ProductDetail = ({ products }) => {
                   ) : (
                     <button
                       onClick={() => {
-                        // handleCartUpdate(item);
                         cartNotify();
                         dispatch({type:"ADD_TO_CART", payload: item})
                       }}
@@ -42,14 +41,25 @@ export const ProductDetail = ({ products }) => {
                       Add to Cart
                     </button>
                   )}
-                  <button
-                    onClick={() => {
-                      handleWishListUpdate(item);
-                      wishListNotify();
-                    }}
-                  >
-                    Add to Favourite
-                  </button>
+                  {states.wishlist.find((element) => element.id === item.id) ? (
+                <button
+                  onClick={() => {
+                    dispatchs({type:"REMOVE_FROM_WISHLIST", payload: id})
+                    deleteNotify();
+                  }}
+                >
+                  Remove from Favourite
+                </button>
+              ) : (
+                <button
+                  onClick={() => {
+                    dispatchs({type:"ADD_TO_WISHLIST", payload: item})
+                    wishListNotify();
+                  }}
+                >
+                  Add to Favourite
+                </button>
+              )}
                 </div>
               </div>
             </div>

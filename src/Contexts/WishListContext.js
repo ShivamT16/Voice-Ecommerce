@@ -1,12 +1,14 @@
-import { createContext, useState } from "react";
+import { createContext, useReducer, useState } from "react";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { initialState, wishlistReducer } from "../Reducers/WishListReducer";
 
 export const WishListContext = createContext();
 
 export function WishListProvider({ children }) {
   const [wishList, setWishList] = useState([]);
-
+  const [states, dispatchs] = useReducer(wishlistReducer,initialState)
+  console.log(states.wishlist)
   const handleWishListUpdate = (item) => {
     const findProduct = wishList.find((element) => element.id === item.id);
 
@@ -35,7 +37,7 @@ export function WishListProvider({ children }) {
 
   return (
     <WishListContext.Provider
-      value={{ wishList, handleWishListUpdate, handleDelete, wishListNotify }}
+      value={{ wishList, handleWishListUpdate, handleDelete, wishListNotify, states, dispatchs }}
     >
       {children}
     </WishListContext.Provider>

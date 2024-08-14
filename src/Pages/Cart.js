@@ -6,15 +6,8 @@ import "./cart.css";
 import { CartContext, WishListContext } from "..";
 
 export const Cart = () => {
-  const {
-    cart,
-    handleDelete,
-    handleIncreaseQuantity,
-    handleDecreaseQuantity,
-    totalPrice,
-    deleteNotify, state, dispatch
-  } = useContext(CartContext);
-  const { handleWishListUpdate, wishListNotify } = useContext(WishListContext);
+  const { totalPrice, deleteNotify, state, dispatch } = useContext(CartContext);
+  const { wishListNotify, states, dispatchs } = useContext(WishListContext);
 
   return (
     <div>
@@ -66,13 +59,28 @@ export const Cart = () => {
                 >
                   Remove
                 </button>
+                {states.wishlist.find((element) => element.id === item.id) ? (
                 <button
                   onClick={() => {
-                    handleWishListUpdate(item); wishListNotify();
+                    // handleDelete(id);
+                    dispatchs({type:"REMOVE_FROM_WISHLIST", payload: id})
+                    deleteNotify();
                   }}
                 >
-                  Add to WishList
+                  Remove from Favourite
                 </button>
+              ) : (
+                <button
+                  onClick={() => {
+                    // handleWishListUpdate(item);
+                    dispatchs({type:"ADD_TO_WISHLIST", payload: item})
+                    wishListNotify();
+                  }}
+                >
+                  Add to Favourite
+                </button>
+              )}
+
               </div>
             );
           })

@@ -6,17 +6,15 @@ import "react-toastify/dist/ReactToastify.css";
 import { CartContext, WishListContext } from "..";
 
 export const WishList = () => {
-  const { handleCartUpdate, cartNotify, deleteNotify, cart } = useContext(
-    CartContext
-  );
-  const { wishList, handleDelete } = useContext(WishListContext);
+  const { cartNotify, deleteNotify, state, dispatch } = useContext( CartContext );
+  const { states, dispatchs } = useContext(WishListContext);
 
   return (
     <div>
       <h2> Here is Your WishList </h2>
       <div className="product">
-        {wishList.length > 0 ? (
-          wishList.map((item) => {
+        {states.wishlist.length > 0 ? (
+          states.wishlist.map((item) => {
             const { id, name, price, image } = item;
 
             return (
@@ -24,14 +22,14 @@ export const WishList = () => {
                 <img alt="product img" src={image} />
                 <ul>{name}</ul>
                 <ul>INR:{price}</ul>
-                {cart.find((element) => element.id === item.id) ? (
+                {state.cart.find((element) => element.id === item.id) ? (
                   <NavLink to="/cart">
                     <button> Go to Cart</button>
                   </NavLink>
                 ) : (
                   <button
                     onClick={() => {
-                      handleCartUpdate(item);
+                      dispatch({type:"ADD_TO_CART", payload: item})
                       cartNotify();
                     }}
                   >
@@ -40,7 +38,7 @@ export const WishList = () => {
                 )}
                 <button
                   onClick={() => {
-                    handleDelete(id);
+                    dispatchs({type:"REMOVE_FROM_WISHLIST", payload: id})
                     deleteNotify();
                   }}
                 >

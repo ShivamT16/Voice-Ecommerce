@@ -6,7 +6,7 @@ import "./checkout.css";
 import { AddressContext, CartContext } from "..";
 
 export const Checkout = () => {
-  const { cart, totalPrice, state } = useContext(CartContext);
+  const { totalPrice, state } = useContext(CartContext);
   const { address, addresses } = useContext(AddressContext);
   const notify = () => toast.success("Order Placed");
 
