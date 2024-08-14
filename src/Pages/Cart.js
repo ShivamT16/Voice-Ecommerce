@@ -31,7 +31,6 @@ export const Cart = () => {
                 <div>
                   <button
                     onClick={() => 
-                      // handleDecreaseQuantity(item)
                       dispatch({type: "DECREASE_QUANTITY", payload: item})
                     }
                     disabled={quantity === 1}
@@ -42,7 +41,6 @@ export const Cart = () => {
                   <button
                     type="button"
                     onClick={() => 
-                      // handleIncreaseQuantity(item)
                       dispatch({type: "INCREASE_QUANTITY", payload: item})
                     }
                   >
@@ -52,7 +50,6 @@ export const Cart = () => {
                 <button
                   type="button"
                   onClick={() => {
-                    // handleDelete(id);
                     deleteNotify();
                     dispatch({type: "REMOVE_FROM_CART", payload: id})
                   }}
@@ -62,7 +59,6 @@ export const Cart = () => {
                 {states.wishlist.find((element) => element.id === item.id) ? (
                 <button
                   onClick={() => {
-                    // handleDelete(id);
                     dispatchs({type:"REMOVE_FROM_WISHLIST", payload: id})
                     deleteNotify();
                   }}
@@ -72,7 +68,6 @@ export const Cart = () => {
               ) : (
                 <button
                   onClick={() => {
-                    // handleWishListUpdate(item);
                     dispatchs({type:"ADD_TO_WISHLIST", payload: item})
                     wishListNotify();
                   }}

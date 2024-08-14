@@ -2,12 +2,14 @@ import { useContext } from "react";
 import { Link } from "react-router-dom";
 import "./home.css";
 
-import { CategoryContext } from "..";
+import { ProductContext } from "..";
 
 export const Home = ({ categories }) => {
-  const { handleCategory } = useContext(CategoryContext);
+  const { handleCategory } = useContext(ProductContext);
+
   return (
     <div className="Home">
+
       {categories.map((item) => {
         const { _id, category, imageLink } = item;
         return (
@@ -19,6 +21,7 @@ export const Home = ({ categories }) => {
           </div>
         );
       })}
+      
     </div>
   );
 };

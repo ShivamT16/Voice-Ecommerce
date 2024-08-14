@@ -2,23 +2,17 @@ import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 
-import {
-  CartContext,
-  WishListContext,
-  ProductContext,
-  CategoryContext
-} from "..";
+import { CartContext, WishListContext, ProductContext } from "..";
 
 export const CategoryWise = ({ products }) => {
   const { cartNotify, state, dispatch } = useContext(CartContext);
   const { handleWishListUpdate, wishListNotify } = useContext(WishListContext);
-  const { handleProduct } = useContext(ProductContext);
-  // const { state } = useContext(CategoryContext);
+  const { handleProduct, productCategory } = useContext(ProductContext);
 
   return (
     <div className="product">
       {products
-        .filter(({ category }) => category === state)
+        .filter(({ category }) => category === productCategory)
         .map((item) => {
           const { id, name, price, image } = item;
           return (
@@ -39,7 +33,6 @@ export const CategoryWise = ({ products }) => {
               ) : (
                 <button
                   onClick={() => {
-                    // handleCartUpdate(item);
                     cartNotify();
                     dispatch({type:"ADD_TO_CART", payload: item})
                   }}
