@@ -31,3 +31,5 @@ React JS
 React Router v6
 
 React useContext
+
+React useReducer
