@@ -6,13 +6,13 @@ import "react-toastify/dist/ReactToastify.css";
 export const AuthContext = createContext();
 
 export function AuthProvider({ children }) {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(Boolean(localStorage.getItem("currentUser")));
   const navigate = useNavigate();
   const location = useLocation();
 
   const dummyData = [
-    { email: "dummy@234", password: "2345" },
-    { email: "TestUser@voice.com", password: "password" }
+    {id: "user101", email: "dummy@234", password: "2345" },
+    {id: "user102", email: "TestUser@voice.com", password: "password" }
   ];
 
   const [userRegistration, setUserRegistration] = useState({
@@ -32,6 +32,7 @@ export function AuthProvider({ children }) {
 
   const handleLogin = () => {
     setIsLoggedIn(!isLoggedIn);
+    localStorage.removeItem("currentUser");
     setTimeout(() => {
       navigate("/login", { replace: true }); emptyForm();
     }, 1000);
@@ -74,6 +75,7 @@ export function AuthProvider({ children }) {
         }, 1800);
         setIsLoggedIn(true);
         toast.success("Welcome " + userRegistration.firstName);
+        localStorage.setItem("currentUser", JSON.stringify(newRecord));
       } else {
         toast.error("Passwords do not match");
       }
@@ -110,6 +112,7 @@ export function AuthProvider({ children }) {
             emptyForm();
         }, 1500);
         toast.success("Welcome");
+        localStorage.setItem("currentUser", JSON.stringify(newEntry));
       } else {
         toast.error("Invalid Email or Password");
       }
@@ -119,8 +122,9 @@ export function AuthProvider({ children }) {
   };
 
   const handleTestUser = () => {
-    setUserLogin({ email: "TestUser@voice.com", password: "password" });
+    setUserLogin({id: "user102", email: "TestUser@voice.com", password: "password" });
     setIsLoggedIn(!isLoggedIn);
+    localStorage.setItem("currentUser", JSON.stringify({id: "user102", email: "TestUser@voice.com", password: "password" }));
   };
 
   return (
