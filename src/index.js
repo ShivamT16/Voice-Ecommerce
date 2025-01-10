@@ -19,7 +19,7 @@ export { AddressContext };
 export { AuthContext };
 
 root.render(
-  <React.StrictMode>
+  // <React.StrictMode>
    <Router>
       <ProductProvider>
         <CartProvider>
@@ -33,5 +33,5 @@ root.render(
         </CartProvider>
       </ProductProvider>
     </Router>
-  </React.StrictMode>
+  // </React.StrictMode>
 );
